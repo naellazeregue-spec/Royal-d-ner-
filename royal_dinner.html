@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROYAL DINNER — Pixel Quest</title>
+<style>
+:root{--bg:#100f20;--panel:#211d3c;--gold:#ffd36b;--cream:#fff3dc;--pink:#ff668c;--blue:#8bd8ff;--mint:#8df0b2}
+*{box-sizing:border-box} body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0,#34234e,var(--bg) 65%);color:var(--cream);font-family:ui-monospace,Menlo,Consolas,monospace;display:flex;justify-content:center;padding:14px}
+main{width:min(850px,100%);align-self:center;background:var(--panel);border:4px solid var(--gold);box-shadow:0 0 0 5px #070711,8px 8px 0 #080711;padding:clamp(12px,3vw,24px)}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:3px dashed #5b527f;padding-bottom:12px}.logo{font-size:clamp(20px,4vw,30px);font-weight:1000;color:var(--gold);text-shadow:3px 3px #8a426b;letter-spacing:2px}.chip{border:2px solid #5b527f;padding:7px 9px;font-size:11px}
+.scene{height:clamp(175px,35vw,260px);position:relative;overflow:hidden;border:4px solid #080711;margin:16px 0;background:linear-gradient(#27285d 0%,#b75e85 65%,#f5a86a 100%);image-rendering:pixelated}
+.scene.castle{background:linear-gradient(#1a2455,#f39b83)}.scene.dining{background:linear-gradient(#25152c,#8a344b 75%,#d59b60)}.scene.invite{background:linear-gradient(90deg,#231a2b,#69452d,#231a2b)}
+.stars{position:absolute;inset:0;background-image:radial-gradient(#fff1bc 1px,transparent 2px),radial-gradient(#fff 1px,transparent 2px);background-size:61px 57px,89px 71px;background-position:8px 10px,27px 21px;opacity:.65}
+.moon{position:absolute;top:15%;right:14%;width:35px;height:35px;border-radius:50%;background:#fff0b4;box-shadow:0 0 25px #ffd36b}
+.castle-shape{position:absolute;bottom:20%;left:23%;width:54%;height:55%;background:#40366e;border:4px solid #17152a;clip-path:polygon(0 100%,0 35%,12% 35%,12% 8%,25% 8%,25% 35%,37% 35%,37% 0,63% 0,63% 35%,75% 35%,75% 8%,88% 8%,88% 35%,100% 35%,100% 100%)}
+.castle-shape:after{content:"";position:absolute;bottom:0;left:43%;width:14%;height:35%;background:#e3a45b;border:3px solid #17152a}
+.floor{position:absolute;bottom:0;height:24%;width:100%;background:repeating-conic-gradient(#9b526f 0 25%,#673d67 0 50%) 0/28px 28px;border-top:4px solid #e4a06a}
+.window{position:absolute;bottom:24%;left:12%;height:36%;width:14%;border:5px solid var(--gold);background:#6ca8cb}
+.candles{position:absolute;bottom:24%;right:12%;color:#ffd36b;font-size:32px}
+.person{position:absolute;bottom:19%;left:48%;width:30px;height:65px;transform:translateX(-50%);z-index:2}
+.person .head{position:absolute;top:0;left:5px;width:21px;height:21px;background:#eab58a;border:3px solid #151426}
+.person .hair{position:absolute;top:-4px;left:3px;width:25px;height:9px;background:#49233b;border:3px solid #151426;z-index:1}
+.person .body{position:absolute;top:21px;left:2px;width:27px;height:27px;background:#397ca5;border:3px solid #151426}
+.person .legs{position:absolute;top:46px;left:5px;width:8px;height:18px;background:#302e62;border:2px solid #151426;box-shadow:12px 0 #302e62,12px 0 0 2px #151426}
+.person.queen{left:72%;bottom:20%}.person.queen .body{background:#9d2c55}.person.queen .hair{background:#e4a93f}.crown{position:absolute;top:-16px;left:1px;color:var(--gold);font-size:22px;text-shadow:2px 2px #151426}
+.letter{position:absolute;inset:16% 18%;background:#f0d7a1;color:#422b35;border:5px solid #a77745;display:grid;place-items:center;text-align:center;padding:12px;transform:rotate(-2deg);box-shadow:5px 6px #171326;font-family:Georgia,serif;font-size:clamp(13px,2.4vw,19px)}
+.scene-title{position:absolute;top:10px;left:10px;z-index:4;background:#11101ee8;border:2px solid var(--gold);padding:6px 8px;color:var(--gold);font-size:11px}
+h1{font-size:clamp(22px,5vw,34px);color:var(--gold);margin:8px 0}p{line-height:1.55;margin:10px 0 16px}
+button{font:inherit;font-weight:800;cursor:pointer;border:0;border-bottom:5px solid #ad7733;background:var(--gold);color:#191428;padding:13px 14px;margin:5px 0;width:100%;text-align:left}
+button:hover{filter:brightness(1.1)}button:active{transform:translateY(2px);border-bottom-width:3px}
+button.alt{background:#b6a6ed;border-bottom-color:#70619d}button.good{background:var(--mint);border-bottom-color:#4a9b72}button.danger{background:var(--pink);border-bottom-color:#a93b61}
+.choices{display:grid;gap:4px}.dialogue{background:#100f20;border:3px solid var(--pink);padding:12px;margin:12px 0;line-height:1.5}.small{font-size:12px;color:#c7bfdf}.hidden{display:none!important}.status{color:var(--blue);font-size:12px;margin-top:12px}
+@media(min-width:620px){.choices{grid-template-columns:1fr 1fr}.choices button:last-child:nth-child(odd){grid-column:1/-1}}
+</style>
+</head>
+<body><main>
+<header><div class="logo">👑 ROYAL DINNER</div><div class="chip" id="step">INTRO • 0/6</div><div class="chip">PIXEL QUEST</div></header>
+<div class="scene invite" id="scene"><div class="stars"></div><div class="moon"></div><div class="floor"></div><div class="window"></div><div class="candles">♟</div><div class="letter" id="letter">♛<br><b>Sa Majesté la Reine</b><br>vous invite à dîner au palais.<br>Votre présence est attendue.</div><div class="scene-title" id="sceneLabel">UNE LETTRE ROYALE</div></div>
+<section id="content"><h1>Une invitation royale !</h1><p>Une enveloppe cachetée d’or arrive chez toi. La reine t’invite à dîner au palais. Attention : chaque détail compte. Une seule erreur de politesse et le dîner recommence depuis le début !</p><button onclick="start()">▶ OUVRIR L’INVITATION</button><p class="small">Jeu de choix • Cinématiques pixel art • Compatible téléphone</p></section>
+<div class="status" id="status" aria-live="polite"></div>
+</main>
+<script>
+const levels=[
+{label:"L’ARRIVÉE",scene:"castle",title:"Les portes du palais",text:"Tu arrives devant le palais. Les gardes ouvrent les portes. Comment entres-tu ?",choices:[["Tu avances calmement et salues les gardes.",1],["Tu cours en criant jusqu’à la porte.",0],["Tu passes devant tout le monde en poussant.",0]],win:"Tu avances avec élégance. Les portes s’ouvrent devant toi."},
+{label:"LA RENCONTRE",scene:"dining",title:"Face à la reine",text:"La reine te sourit : « Bienvenue, jeune invité. » Que réponds-tu ?",choices:[["« Merci de votre invitation, Majesté. »",1],["« Wesh, ça va ? »",0],["Tu l’ignores et regardes la salle.",0]],win:"La reine apprécie ta réponse respectueuse."},
+{label:"À TABLE",scene:"dining",title:"Choisir sa place",text:"La reine est encore debout près de sa chaise. Que fais-tu ?",choices:[["Tu attends qu’elle t’invite à t’asseoir.",1],["Tu prends sa place pour plaisanter.",0],["Tu t’assois immédiatement sur la table.",0]],win:"La reine t’invite à prendre place."},
+{label:"LE REPAS",scene:"dining",title:"Un plat arrive",text:"Le serveur apporte un plat que tu n’aimes pas beaucoup. Comment réagis-tu ?",choices:[["Tu remercies le serveur et restes poli.",1],["Tu dis que le plat est dégoûtant.",0],["Tu repousses brusquement l’assiette.",0]],win:"Tu gardes ton calme. Le repas continue."},
+{label:"CONVERSATION",scene:"dining",title:"Une question délicate",text:"La reine te pose une question alors que tu es en train de manger. Que fais-tu ?",choices:[["Tu termines ta bouchée puis réponds.",1],["Tu réponds la bouche pleine.",0],["Tu lui coupes la parole.",0]],win:"Tu réponds avec tact. La reine sourit."},
+{label:"LE DÉPART",scene:"dining",title:"La fin du dîner",text:"Le dîner est terminé. Que fais-tu avant de quitter la salle ?",choices:[["Tu remercies la reine pour ce dîner.",1],["Tu pars sans dire au revoir.",0],["Tu réclames un cadeau en partant.",0]],win:"La reine se lève et te félicite pour tes manières."}
+];
+let index=0;
+function sceneSetup(kind,label){const s=document.getElementById('scene');s.className='scene '+kind;document.getElementById('sceneLabel').textContent=label;document.getElementById('letter').classList.toggle('hidden',kind!=='invite');s.querySelectorAll('.person,.castle-shape').forEach(x=>x.remove());if(kind==='castle'){let c=document.createElement('div');c.className='castle-shape';s.appendChild(c);let p=person(false);s.appendChild(p)}if(kind==='dining'){let p=person(false),q=person(true);s.append(p,q)}}
+function person(queen){let p=document.createElement('div');p.className='person'+(queen?' queen':'');p.innerHTML=(queen?'<div class="crown">♛</div>':'')+'<div class="hair"></div><div class="head"></div><div class="body"></div><div class="legs"></div>';return p}
+function start(){index=0;showLevel()}
+function showLevel(){let l=levels[index];document.getElementById('step').textContent='ÉTAPE '+(index+1)+'/6';sceneSetup(l.scene,l.label);document.getElementById('status').textContent='';document.getElementById('content').innerHTML='<h1>'+l.title+'</h1><p>'+l.text+'</p><div class="choices">'+l.choices.map((c,i)=>'<button class="'+(i===0?'':'alt')+'" onclick="choose('+i+')">'+String.fromCharCode(65+i)+'. '+c[0]+'</button>').join('')+'</div><p class="small">Attention : une seule erreur et tu recommences tout.</p>'}
+function choose(n){let l=levels[index];if(l.choices[n][1]){document.getElementById('status').textContent='✓ Bonne réponse !';if(index===levels.length-1){victory();return}document.getElementById('content').innerHTML='<div class="dialogue">👑 <b>La Reine :</b><br>'+l.win+'</div><button class="good" onclick="index++;showLevel()">CONTINUER ▶</button>';document.getElementById('step').textContent='BIEN JOUÉ • '+(index+1)+'/6'}else{sceneSetup('dining','ERREUR ROYALE');document.getElementById('step').textContent='ÉCHEC';document.getElementById('status').textContent='✕ Mauvaise réponse';document.getElementById('content').innerHTML='<h1 style="color:var(--pink)">Oh non…</h1><p>Tu as commis une erreur de politesse ! Le dîner recommence depuis l’invitation.</p><div class="dialogue">La reine : « Nous allons reprendre depuis le début… »</div><button class="danger" onclick="start()">↻ RECOMMENCER DEPUIS L’INVITATION</button>'}}
+function victory(){sceneSetup('dining','VICTOIRE ROYALE');document.getElementById('step').textContent='VICTOIRE • 6/6';document.getElementById('content').innerHTML='<h1>🎉 Dîner réussi !</h1><p>Tu as terminé le dîner sans aucune faute et impressionné la reine.</p><div class="dialogue">👑 La Reine : « Bravo ! Vous avez fait preuve d’une grande élégance. Vous êtes un invité d’exception. »</div><button class="good" onclick="start()">▶ REJOUER</button>';document.getElementById('status').textContent='FIN • ROYAL DINNER'}
+</script></body></html>
